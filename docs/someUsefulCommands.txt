@@ -1,0 +1,13 @@
+#Some useful commands in ubuntu
+
+sudo #This elevates you to super user, prefix any command with this to run that command as an administrator
+
+apt-get #This is a command to deal with 'packages', aka installed programs and stuff on your computer
+	#You can pass it several subcommands, such as
+	install SOME_PACKAGE_NAME #This would install SOME_PACKAGE_NAME
+	update #Get the latest list of all the packages
+	upgrade #Update everything on the system to the latest version. You should run this periodically.
+
+	#example usage to install geany the text editor
+	sudo apt-get install geany
+
