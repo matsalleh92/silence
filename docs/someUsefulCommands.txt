@@ -11,3 +11,6 @@ apt-get #This is a command to deal with 'packages', aka installed programs and s
 	#example usage to install geany the text editor
 	sudo apt-get install geany
 
+	#example usage to list version of installed package
+	sudo apt list --installed | grep -i geany
+
