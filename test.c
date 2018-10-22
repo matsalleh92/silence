@@ -2,6 +2,7 @@
  
 GtkWidget *g_lbl_hello;
 GtkWidget *g_lbl_count;
+//GtkWidget *bmc_image;
  
 int main(int argc, char *argv[])
 {
@@ -19,6 +20,9 @@ int main(int argc, char *argv[])
     // get pointers to the two labels
     g_lbl_hello = GTK_WIDGET(gtk_builder_get_object(builder, "lbl_hello"));
     g_lbl_count = GTK_WIDGET(gtk_builder_get_object(builder, "lbl_count"));
+    
+    //get pointer to the image..
+    //bmc_image = GTK_WIDGET(gtk_builder_get_object(builder, "the_image"));
  
     g_object_unref(builder);
  
@@ -38,6 +42,9 @@ void on_btn_hello_clicked()
     count++;
     sprintf(str_count, "%d", count);
     gtk_label_set_text(GTK_LABEL(g_lbl_count), str_count);
+    
+    //load the image..
+  //  gtk_image_new_from_file ("cat.jpg");
 }
  
 // called when window is closed
