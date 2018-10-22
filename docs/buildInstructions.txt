@@ -1,0 +1,61 @@
+****************************************************************
+* Chris' extremely concise guide to building GTK+ applications *
+****************************************************************
+
+-Definitions- 
+IDE: Integrated development environment. The things we hate: visual studio/eclipse etc etc
+
+GTK+: This is the name of the widget library, ie the thing that actually draws the stuff on the screen and says what function
+
+GTK2: Version two of the GTK+ library (we probably won't use this)
+
+GTK3: Version three of the GTK+ library (we will likely use this). The two have slightly different implementation ideologies. GTK3 uses CSS and other cool stuff and is designed to look good on 4K screens
+
+Glade: A tool to make designing the GUI easy. ie, what button goes where etc. All this program does is create something like a HTML file that says where each button goes and what function to call when it's pressed etc. For example, you might draw a button and set the on_click property to btn_call(). When the application is running it will call btn_call() but you don't actually define that code in Glade. Remember how everything in linux/unix land does it's one job very well? Glade isn't an IDE or compiler - it's ONE job is to generate this XML file.
+
+Event-driven programming: This is fortunately how Glade works, and whaat you're used to. It means that functions are called when events happen. Ie, you call btn_call() when you click on something. (At least this is how it appears to the programmer, in actuality it doesn't work like that)
+
+gcc: A compiler that takes C code and converts it machine code. Gnu C Compiler
+
+Geany: Text editor
+
+-General Process-
+1) Draw a bunch of shit in Glade and assign the correct labels and stuff
+2) Write some code in Geany that opens up your glade code
+3) Compile said code and run it
+
+-Compile Options-
+***********************
+* IMPORTANT! READ THIS*
+***********************
+Geany runs gcc for us which is handy. It passes a bunch of default options. Like all programs in unnix/linux this is done with something called switches at the command line which just means you place a dash, - , after the command. For example: someProgram -someSwitch 
+
+For some reason that I don't fully understand (yet) you need a bunch of options/switches to actually get a GTK+ program to compile. You can set these options in geany by clicking the arrow next to the brick and clicking build settings or something.
+
+At time of writing I don't have access to Geany, but by default it will probably be something like this:
+# gcc -Wall -o "%e" "%f" (something like this)
+This means, run gcc, show all warnings (-Wall), output (-o) it to "%e" (geany code for the name of the executable), using input file "%f" (weird Geany syntax for current file).
+
+Here's the options you need to add:
+`pkg-config --cflags --libs gtk+-3.0` (without a dash, but with those back ticks), see reference [2]
+-pipe 
+-pthread
+-rdynamic see reference 3 of that these do
+
+Your geany command might look something like this:
+gcc -Wall -rdynamic -pipe -pthread `pkg-config --cflags --libs gtk+-3.0` -o "%e" "%f" (something like this)
+
+-Dependencies-
+************************
+* IMPORTANT! READ THIS *
+************************
+You will obviously need libraries to compile this. I ubuntu (I think) they are the following package names:
+
+
+
+
+-Useful Reading-
+[1] https://www.reddit.com/r/linux/comments/1x6lce/eli5_what_are_the_prime_differences_between_gtk2/
+[2] https://developer.gnome.org/gtk3/stable/gtk-compiling.html
+[3] https://gcc.gnu.org/onlinedocs/gcc/Link-Options.html
+
