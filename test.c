@@ -2,12 +2,14 @@
  
 GtkWidget *g_lbl_hello;
 GtkWidget *g_lbl_count;
-//GtkWidget *bmc_image;
+
+GtkWidget *fixed;
+GtkWidget *bmc_image;
  
 int main(int argc, char *argv[])
 {
-    GtkBuilder      *builder; 
-    GtkWidget       *window;
+    GtkBuilder		*builder; 
+	GtkWidget 		*window;
  
     gtk_init(&argc, &argv);
  
@@ -21,8 +23,11 @@ int main(int argc, char *argv[])
     g_lbl_hello = GTK_WIDGET(gtk_builder_get_object(builder, "lbl_hello"));
     g_lbl_count = GTK_WIDGET(gtk_builder_get_object(builder, "lbl_count"));
     
+    //get pointer to fixed thingy..
+    fixed = GTK_WIDGET(gtk_builder_get_object(builder, "fixed1"));
+    
     //get pointer to the image..
-    //bmc_image = GTK_WIDGET(gtk_builder_get_object(builder, "the_image"));
+  //  bmc_image = GTK_WIDGET(gtk_builder_get_object(builder, "the_image"));
  
     g_object_unref(builder);
  
@@ -44,7 +49,9 @@ void on_btn_hello_clicked()
     gtk_label_set_text(GTK_LABEL(g_lbl_count), str_count);
     
     //load the image..
-  //  gtk_image_new_from_file ("cat.jpg");
+    bmc_image = gtk_image_new_from_file("cat.jpg");
+    gtk_container_add (GTK_CONTAINER(fixed), bmc_image);
+    gtk_widget_show(bmc_image);                
 }
  
 // called when window is closed
